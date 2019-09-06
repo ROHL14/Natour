@@ -1,0 +1,59 @@
+*,
+*::before, // It is better to add the pseudo-elements to get the behavior tha we are changing here in our global reset
+*::after {
+  margin: 0;
+  padding: 0;
+  // box-sizing: border-box; this is bad practice
+
+  box-sizing: inherit; // inherited, and is a better practice doing it in this way
+}
+
+html {
+  // font-size: 10px; is no good use px because the user it can't use the zoom because our font-size is stuck in 10px
+  // this defines what 1rem is
+  font-size: 62.5%; //1rem = 10px; 10px/16px= 62.5%
+
+  /*@include respond-phone {
+    font-size: 50%;
+  }*/
+
+  /*
+  dont need this one because i want 1rem=8px and its declared already for tab_port but 
+  since we are using max-width it will also apply for phone size screen
+  @include respond(phone) {
+    font-size: 50%;
+  }
+  */
+
+  //width < 1200
+  @include respond(tab_land) {
+    font-size: 56.25%; //1rem = 9px; 9px/16px= 56.25%
+  }
+
+  //width < 900
+  @include respond(tab_port) {
+    font-size: 50%; //1rem = 8px; 8px/16px= 50%
+  }
+
+  /*@include respond(phone) {
+    font-size: 37.5%; //1rem = 6px; 6px/16px= 37.5%
+  }*/
+
+  @include respond(big_desktop) {
+    font-size: 75%; //1rem = 12px; 12px/16px= 75%
+  }
+}
+
+body {
+  box-sizing: border-box; // inherited, and is a better practice doing it in this way
+  padding: 3rem;
+
+  @include respond(tab_port) {
+    padding: 0;
+  }
+}
+
+::selection {
+  background-color: $color-primary;
+  color: $color-white;
+}
